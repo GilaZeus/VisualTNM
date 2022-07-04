@@ -47,5 +47,3 @@ create_diff_dataset <- function(data, D, thickness = 10, width = 4, height = 2.5
     dplyr::mutate(y = ifelse(!!D == "4", y + rand_y * noise_multipliers[4], y)) %>%
     dplyr::select(-rand_x, -rand_y)
 }
-
-
