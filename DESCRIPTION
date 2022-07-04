@@ -1,0 +1,20 @@
+Package: VisualTNM
+Type: Package
+Title: Visualization of cancer data
+Version: 0.3.0
+Author: Rustam Gilyazev
+Maintainer: Rustam Gilyazev <rustam.gilyazev@th-bingen.de>
+Description: Tools for beautiful and informative cancer data visualization
+    1. Voronoi-diagrams for grading
+    2. Circle packing for tumor size
+    3. Donuts for other
+    3. Informative description of dataset
+    3. MCA for general relationships
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+        tibble (>= 2.1.1),
+        dplyr (>= 0.8.0.1),
+        ggplot2 (>= 3.3.5),
+        magrittr (>= 2.0.1)
