@@ -13,7 +13,7 @@ calculate_UICC <- function(data, T, N, M) {
   data %>%
     dplyr::mutate(UICC = ifelse(is.na(!!M),
                                 NA,
-                                ifelse(!!M == "M1",
+                                ifelse(!!M == "1",
                                        "IV",
                                        ifelse(is.na(!!N),
                                               NA,
