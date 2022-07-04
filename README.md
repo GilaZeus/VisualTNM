@@ -51,7 +51,7 @@ If you have `treemapify`, you can also draw a treemap:
 # install.packages("treemapify")
 # library(treemapify)
 plot_data <-
-  x %>% 
+  dataset %>% 
   count_NAs(T, N, M, D)
 ggplot(plot_data, aes(area = n, fill = value, label = paste(name, "\n", n, sep = ""))) +
   geom_treemap() +
@@ -59,4 +59,45 @@ ggplot(plot_data, aes(area = n, fill = value, label = paste(name, "\n", n, sep =
 ```
 ![Missing Values](pics/NAs.png?raw=true "Title")
 
-## 
+## Circular plot
+```
+# install.packages("tidyverse")
+# library(tidyverse)
+coords <-
+  dataset %>%
+  create_age_groups(Alter, Altersgruppe, 70) %>% 
+  group_by(Altersgruppe) %>% 
+  calc_freq(M, omit_NA = FALSE) %>%                                
+  new_size(total_num = 60) %>%
+  create_circle_coords() %>% 
+  mutate(x = ifelse(Altersgruppe == "< 70", x * 1.2, x),
+         y = ifelse(Altersgruppe == "< 70", y * 1.2, y))
+
+ggplot(coords, aes(x, y, colour = M, shape = Altersgruppe)) +
+  geom_point(size = 5) +
+  theme_void() +
+  geom_text(x = 0, y = 0, label = "Metastases", size = 10, colour = "black", check_overlap = TRUE) +
+  coord_fixed()
+```
+![Metastases](pics/Metastases.png?raw=true "Title")
+
+## Donuts
+```
+# install.packages("tidyverse")
+# library(tidyverse)
+coords <- 
+  dataset %>% 
+  create_age_groups(Alter, Altersgruppe, 70) %>% 
+  create_donut(Altersgruppe, UICC) %>% 
+  mutate(x = ifelse(Altersgruppe == "< 70", x * 1.5, x),
+         y = ifelse(Altersgruppe == "< 70", y * 1.5, y))
+
+
+ggplot(coords, aes(x, y, colour = UICC)) +
+  geom_point(size = 20) +
+  geom_text(x = 0, y = 0, label = "UICC", size = 10, colour = "black", check_overlap = TRUE) +
+  theme_void() +
+  guides(colour = guide_legend(override.aes = list(size = 5))) +
+  coord_fixed()
+```
+![Donuts](pics/UICC.png?raw=true "Title")
