@@ -7,6 +7,7 @@
 #' @param D Grading column name
 #' @param U UICC column name
 #' @return A tibble with three columns: full (which case of missing value), n (count), x (dummy for easy plotting)
+#' @export
 check_integrity <- function(data, T, N, M, D, U) {
   T <- rlang::enquo(T)
   N <- rlang::enquo(N)
@@ -49,6 +50,7 @@ check_integrity <- function(data, T, N, M, D, U) {
 #' @param M Metastases column name
 #' @param D Grading column name
 #' @return A tibble with value, name, n columns containing number of NAs and whole data
+#' @export
 count_NAs <- function(data, T, N, M, D) {
   T <- rlang::enquo(T)
   N <- rlang::enquo(N)

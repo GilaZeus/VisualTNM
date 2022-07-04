@@ -18,3 +18,4 @@ Imports:
         dplyr (>= 0.8.0.1),
         ggplot2 (>= 3.3.5),
         magrittr (>= 2.0.1)
+RoxygenNote: 7.1.1

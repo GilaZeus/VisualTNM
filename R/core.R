@@ -5,6 +5,7 @@
 #' @param N Nodal status column name, values: "0", "1", "2", "3"
 #' @param M Metastases column name, values: "M0", "M1"
 #' @return Same data with new UICC column containing UICC stage. If UICC cannot be calculated, it will be filled with NA
+#' @export
 calculate_UICC <- function(data, T, N, M) {
   T <- rlang::enquo(T)
   N <- rlang::enquo(N)
@@ -34,6 +35,7 @@ calculate_UICC <- function(data, T, N, M) {
 #' @param res_name Name of the created column with age groups
 #' @param ... Age group borders in increasing order
 #' @return Same data with new res_name column containing age group info
+#' @export
 create_age_groups <- function(data, age_name, res_name, ...) {
   age_name <- rlang::enquo(age_name)
   res_name <- rlang::enquo(res_name)
@@ -72,6 +74,7 @@ create_age_groups <- function(data, age_name, res_name, ...) {
 #' @param col Column name for which frequencies are calculated
 #' @param omit_NA If TRUE, ignores NAs.
 #' @return Tibble with group names, their quantity (n) and frequencies (freq)
+#' @export
 calc_freq <- function(data, col, omit_NA = TRUE) {
   col <- rlang::enquo(col)
   if (omit_NA) {
@@ -93,6 +96,7 @@ calc_freq <- function(data, col, omit_NA = TRUE) {
 #' @param total_num New size of the dataset
 #' @param highlight_small If TRUE, adds +1 by rounding to the smallest frequencies at first; starts with the biggest by FALSE.
 #' @return same dataset with a new n column with fixed numbers
+#' @export
 new_size <- function(data, total_num = 100, highlight_small = TRUE) {
   data <-
     data %>%
@@ -143,6 +147,7 @@ new_size <- function(data, total_num = 100, highlight_small = TRUE) {
 #' @param width Cell width
 #' @param height Cell height
 #' @return A tibble with coordinates of each cell within the tissue and corresponding value of variable of interest
+#' @export
 create_coord_dataset <- function(data, thickness = 10, width = 4, height = 2.5) {
   total_num <-
     (data %>% dplyr::summarise(s = sum(n)))$s[1]

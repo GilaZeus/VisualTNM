@@ -1,6 +1,9 @@
 #' combine 1/2 with 2, 2/3 with 3 and 3/4 with 4 for grading.
 #'
-#' @param data A tibble
+#' @param data A dataframe
+#' @param D Column with grading
+#' @return Same dataframe with combined gradings.
+#' @export
 combine_diff <- function(data, D) {
   D <- rlang::enquo(D)
   data %>%
@@ -22,6 +25,7 @@ combine_diff <- function(data, D) {
 #' @param base_noise Base noise for all grading steps
 #' @param noise_multipliers Multipliers for every grading level
 #' @return A tibble with coordinates of each cell within the tissue, their grading status and cell nucleous size
+#' @export
 create_diff_dataset <- function(data, D, thickness = 10, width = 4, height = 2.5, base_noise = 0.55, noise_multipliers = c(0, 1, 2, 4)) {
   D <- rlang::enquo(D)
   if(dplyr::n_distinct(data[, rlang::as_name(D)]) != length(noise_multipliers) | dplyr::n_distinct(data[, rlang::as_name(D)]) != 4) {
